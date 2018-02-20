@@ -39,6 +39,8 @@ class Copy_Yoast_Metadesc_To_Excerpt {
 		add_action( 'admin_menu', array( $this, 'register_menu_page' ) );
 		add_filter( 'plugin_row_meta', array( $this, 'plugin_meta_links' ), 10, 2 );
 		add_action( 'wp_ajax_cym2e_action', array( $this, 'process_form' ) );
+		add_filter( 'manage_posts_columns', array( $this, 'columns_head' ) );
+		add_action( 'manage_posts_custom_column', array( $this,  'columns_content' ), 10, 2 );
 	}
 
 	/**
@@ -173,17 +175,47 @@ class Copy_Yoast_Metadesc_To_Excerpt {
 
 		foreach ( $my_posts as $my_post ):
 
-			$post_id    = $my_post->ID;
-			$yoast_meta = get_post_meta( $post_id, '_yoast_wpseo_metadesc', true );
+			$post_ID    = $my_post->ID;
+			$yoast_meta = get_post_meta( $post_ID, '_yoast_wpseo_metadesc', true );
 
 			$post_array = array(
-				'ID'           => $post_id,
+				'ID'           => $post_ID,
 				'post_excerpt' => $yoast_meta
 			);
 
 			wp_update_post( $post_array );
 
 		endforeach;
+	}
+
+	/**
+	 * Add admin column.
+	 */
+	function columns_head( $columns ) {
+		$columns['cymte'] = 'Yoast metadesc matches excerpt?';
+
+		return $columns;
+	}
+
+	/**
+	 * Add url data to admin column.
+	 */
+	function columns_content( $column_name, $post_ID ) {
+
+		if ( $column_name != 'cymte' ) {
+			return;
+		}
+
+		$excerpt  = get_the_excerpt( $post_ID );
+		$metadesc = get_post_meta( $post_ID, '_yoast_wpseo_metadesc', true );
+
+		if ( $excerpt === $metadesc ) {
+			echo '<span aria-hidden="true" style="display:block;height:12px;width:12px;border-radius:50%;background-color:#7ad03a;"></span>';
+			echo '<span class="screen-reader-text">True</span>';
+		} else {
+			echo '<span aria-hidden="true" style="display:block;height:12px;width:12px;border-radius:50%;background-color:#dc3232;"></span>';
+			echo '<span class="screen-reader-text">False</span>';
+		}
 	}
 
 }
