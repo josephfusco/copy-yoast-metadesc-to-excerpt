@@ -2,7 +2,7 @@
 
 This WordPress plugin that copies all yoast metadesc to the the post excerpt with the click of a button.
 
-[Yoast automatically uses excerpts for metadesc values](https://yoast.com/ask-yoast-meta-descriptions-and-the-excerpt-field/). You may be working on a client site that previously ignored the excerpt field but now needs to used them. Instead of manually copying over yoast metadesc data, to the excerpt field, this plugin does it for you.
+[Yoast automatically uses excerpts for metadesc values](https://yoast.com/ask-yoast-meta-descriptions-and-the-excerpt-field/). You may be working on a client site that previously ignored the excerpt field but now needs to used them. Instead of manually copying over yoast metadesc data to the excerpt field, this plugin does it for you.
 
 **Disclaimer**
 
