@@ -3,7 +3,7 @@
  * Plugin Name:    Copy Yoast Metadesc to Excerpt
  * Plugin URI:     http://github.com/josephfusco/copy-yoast-metadesc-to-excerpt
  * Description:    Copies all yoast metadesc value to the the post excerpt with the click of a button.
- * Version:        1.0.0
+ * Version:        1.1.0
  * Author:         Joseph Fusco
  * Author URI:     https://josephfus.co
  * License:        GPLv2 or later
